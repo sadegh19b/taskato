@@ -1,0 +1,85 @@
+@import "fonts.css";
+
+@layer base {
+    :root {
+        --btn-text-case: none;
+    }
+
+    svg {
+        fill: currentColor;
+    }
+
+    [x-cloak] {
+        display: none;
+    }
+}
+
+@layer components {
+    .collapse-title, .collapse > input[type="checkbox"] {
+        min-height: fit-content;
+    }
+
+    .collapse-content {
+        display: none;
+    }
+    .collapse-open .collapse-content, .collapse:focus:not(.collapse-close) .collapse-content, .collapse:not(.collapse-close) input[type="checkbox"]:checked ~ .collapse-content {
+        display: block;
+    }
+
+    .dropdown-content li.active {
+        @apply bg-primary text-base-100
+    }
+
+    .drawer-side-z-index {
+        z-index: -1;
+    }
+
+    .add-new-btn {
+        @apply text-sm text-primary flex items-center transition transition-all duration-200 hover:bg-base-content hover:bg-opacity-10 active:text-base-100 active:bg-primary active:bg-opacity-100;
+    }
+
+    .todo-btn {
+        @apply flex justify-center w-full px-8 py-4 transition duration-200;
+    }
+    .btn-edit {
+        @apply todo-btn bg-primary bg-opacity-10 hover:bg-opacity-30 text-primary text-opacity-60 hover:text-opacity-70;
+    }
+    .btn-delete {
+        @apply todo-btn bg-error bg-opacity-20 hover:bg-opacity-50 text-red-400 text-opacity-80 hover:text-opacity-100 dark:hover:bg-opacity-30 dark:text-opacity-60 dark:hover:text-opacity-90;
+    }
+    .btn-cancel {
+        @apply todo-btn bg-neutral bg-opacity-10 hover:bg-opacity-20 text-base-content text-opacity-60 hover:text-opacity-80 dark:bg-opacity-30 dark:hover:bg-opacity-60;
+    }
+    .btn-save {
+        @apply todo-btn bg-green-300 bg-opacity-40 hover:bg-opacity-80 text-green-500 text-opacity-60 hover:text-opacity-80 dark:bg-green-400 dark:bg-opacity-20 dark:hover:bg-opacity-30;
+    }
+    [data-theme="winter"] .btn-delete {
+        @apply hover:bg-opacity-50 text-opacity-80 hover:text-opacity-100;
+    }
+    [data-theme="winter"] .btn-cancel {
+        @apply bg-opacity-10 hover:bg-opacity-20;
+    }
+    [data-theme="winter"] .btn-save {
+        @apply bg-green-300 bg-opacity-40 hover:bg-opacity-80;
+    }
+
+    .sidebar-group-btn {
+        @apply flex justify-center p-4 w-full text-primary hover:bg-base-content hover:bg-opacity-10;
+    }
+
+    .modal-btn-cancel {
+        @apply btn bg-opacity-10 border-opacity-10 text-base-content hover:bg-opacity-20 hover:border-opacity-20;
+    }
+    .modal-btn-confirm {
+        @apply btn btn-error bg-opacity-80 border-opacity-80 hover:bg-opacity-100 hover:border-opacity-100;
+    }
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-base-100 bg-opacity-60;
+    }
+}
+
+@layer utilities {
+    .position-initial {
+        position: initial;
+    }
+}

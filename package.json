@@ -1,0 +1,34 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.7",
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14"
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.11.0",
+        "@inertiajs/inertia-svelte": "^0.8.0",
+        "@inertiajs/progress": "^0.2.7",
+        "@jhubbardsf/svelte-sortablejs": "^1.1.0",
+        "daisyui": "^2.15.4",
+        "laravel-mix-svelte": "github:wewowweb/laravel-mix-svelte",
+        "postcss-import": "^14.1.0",
+        "postcss-nesting": "^10.1.8",
+        "svelte": "^3.48.0",
+        "svelte-loader": "^3.1.3",
+        "svelte-preprocess": "^4.10.7",
+        "tailwindcss": "^3.1.3",
+        "theme-change": "^2.0.2"
+    }
+}
