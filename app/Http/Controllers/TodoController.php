@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompletedTodosDestroyRequest;
+use App\Http\Requests\TodoStoreRequest;
+use App\Http\Requests\TodoUpdateRequest;
 use App\Models\Category;
 use App\Models\Todo;
 use Illuminate\Http\Request;
@@ -9,14 +12,9 @@ use Inertia\Inertia;
 
 class TodoController extends Controller
 {
-    public function store(Category $category, Request $request)
+    public function store(Category $category, TodoStoreRequest $request)
     {
-        $data = $request->validate([
-            'title' => ['required', 'max:250'],
-            'sort' => ['numeric'],
-        ]);
-
-        $category->todos()->create($data);
+        $category->todos()->create($request->validated());
     }
 
     public function show(Category $category)
@@ -51,14 +49,9 @@ class TodoController extends Controller
         }
     }
 
-    public function update(Todo $todo, Request $request)
+    public function update(Todo $todo, TodoUpdateRequest $request)
     {
-        $data = $request->validate([
-            'title' => ['required', 'max:250'],
-            'description' => ['nullable'],
-        ]);
-
-        $todo->update($data);
+        $todo->update($request->validated());
     }
 
     public function destroy(Todo $todo)
@@ -66,9 +59,11 @@ class TodoController extends Controller
         $todo->delete();
     }
 
-    public function destroyCompleted(Request $request)
+    public function destroyCompleted(CompletedTodosDestroyRequest $request)
     {
-        Todo::whereCategoryId($request->category_id)->whereNotNull('done_at')->delete();
+        Todo::whereCategoryId($request->input('category_id'))
+            ->whereNotNull('done_at')
+            ->delete();
     }
 
     public function toggleImportant(Todo $todo)

@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\CategoryTransferToGroupRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
 {
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        $data = $request->validate([
-            'title' => ['required', 'max:64'],
-            'is_group' => ['boolean'],
-            'sort' => ['numeric'],
-            'parent_id' => ['nullable', 'numeric', 'exists:categories,id'],
-        ]);
-
-        Category::create($data);
+        Category::create($request->validated());
     }
 
-    public function update(Category $category, Request $request)
+    public function update(Category $category, CategoryUpdateRequest $request)
     {
-        $data = $request->validate([
-            'title' => ['required', 'max:64'],
-        ]);
-
-        $category->update($data);
+        $category->update($request->validated());
     }
 
     public function reorder(Request $request)
@@ -51,19 +43,10 @@ class CategoryController extends Controller
             });
     }
 
-    public function transferToGroup(Category $category, Request $request)
+    public function transferToGroup(Category $category, CategoryTransferToGroupRequest $request)
     {
-        $group = Category::find($request->input('group_id'));
-
-        if (!$group->is_group) {
-            abort(500, __('The category should really be a group.'));
-        }
-
-        if ($group->children()->find($category->id)->exists()) {
-            abort(500, __('The category should not already be in the group!'));
-        }
-
         $lastList = Category::latestParent($request->input('group_id'))->first();
+
         $category->update([
             'parent_id' => $request->input('group_id'),
             'sort' => $lastList ? $lastList->sort + 1 : 0
@@ -73,6 +56,7 @@ class CategoryController extends Controller
     public function removeFromGroup(Category $category)
     {
         $lastList = Category::latestParent()->first();
+
         $category->update(['parent_id' => null, 'sort' => $lastList ? $lastList->sort + 1 : 0]);
     }
 
