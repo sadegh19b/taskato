@@ -14,7 +14,7 @@ use App\Http\Controllers\TodoController;
 |
 */
 
-Route::inertia('/', 'Home')->name('home');
+Route::inertia('/', 'index')->name('home');
 
 Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
     Route::post('/', [CategoryController::class, 'store'])->name('store');

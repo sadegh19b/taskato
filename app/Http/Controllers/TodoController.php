@@ -34,7 +34,7 @@ class TodoController extends Controller
         $todos = $todoModels->whereNull('done_at')->values();
         $todosDone = $todoModels->whereNotNull('done_at')->values();
 
-        return Inertia::render('Todos', [
+        return Inertia::render('todos', [
             'list' => $category,
             'todos' => $todos,
             'todos_done' => $todosDone,

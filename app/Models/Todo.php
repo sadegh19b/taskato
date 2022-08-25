@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,19 +27,25 @@ class Todo extends Model
         return $this->belongsTo(Category::class);
     }
 
-    protected function getCreatedAtPersianAttribute()
+    protected function createdAtPersian(): Attribute
     {
-        return $this->created_at ? persian_date($this->created_at) : null;
+        return Attribute::make(
+            get: fn() => $this->created_at ? persian_date($this->created_at) : null
+        );
     }
 
-    protected function getUpdatedAtPersianAttribute()
+    protected function updatedAtPersian(): Attribute
     {
-        return ($this->updated_at && $this->updated_at != $this->created_at && $this->updated_at != $this->done_at)
-            ? persian_date($this->updated_at) : null;
+        return Attribute::make(
+            get: fn() => ($this->updated_at && $this->updated_at != $this->created_at && $this->updated_at != $this->done_at)
+                ? persian_date($this->updated_at) : null
+        );
     }
 
-    protected function getDoneAtPersianAttribute()
+    protected function doneAtPersian(): Attribute
     {
-        return $this->done_at ? persian_date($this->done_at) : null;
+        return Attribute::make(
+            get: fn() => $this->done_at ? persian_date($this->done_at) : null
+        );
     }
 }
