@@ -1,9 +1,9 @@
 <script>
     import { scale } from 'svelte/transition';
 
-    import PageTitle from "../components/page-title.svelte";
-    import Layout from "../components/layout.svelte";
-    import Icon from "../components/icon.svelte";
+    import PageTitle from "~component/page-title";
+    import Layout from "~component/layout";
+    import Icon from "~component/icon";
 </script>
 
 <PageTitle />

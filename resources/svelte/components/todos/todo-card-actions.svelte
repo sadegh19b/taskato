@@ -2,9 +2,9 @@
     import { createEventDispatcher } from "svelte";
     import { Inertia } from "@inertiajs/inertia";
     import { page } from '@inertiajs/inertia-svelte';
-    import { deleteModal } from "../../stores/delete-modal-store";
+    import { deleteModal } from "~store/delete-modal-store";
 
-    import Icon from "../icon.svelte";
+    import Icon from "~component/icon";
 
     const dispatch = createEventDispatcher();
     const route = window.route;

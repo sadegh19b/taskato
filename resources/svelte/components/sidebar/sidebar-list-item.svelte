@@ -5,10 +5,10 @@
     import { Inertia } from "@inertiajs/inertia";
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { SortableList } from '@jhubbardsf/svelte-sortablejs';
-    import { deleteModal } from "../../stores/delete-modal-store";
+    import { deleteModal } from "~store/delete-modal-store";
 
-    import TextInput from "../text-input.svelte";
-    import Icon from "../icon.svelte";
+    import TextInput from "~component/text-input";
+    import Icon from "~component/icon";
 
     const dispatch = createEventDispatcher();
     const route = window.route;

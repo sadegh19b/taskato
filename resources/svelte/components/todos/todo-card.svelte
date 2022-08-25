@@ -2,14 +2,14 @@
     import { afterUpdate } from "svelte";
     import { Inertia } from "@inertiajs/inertia";
     import { SortableList } from '@jhubbardsf/svelte-sortablejs';
-    import { todoDetail } from "../../stores/todo-detail-store";
+    import { todoDetail } from "~store/todo-detail-store";
 
-    import TodoItem from "./todo-item.svelte";
-    import TodoCardActions from "./todo-card-actions.svelte";
-    import AddTodoInput from "./add-todo-input.svelte";
-    import TextInput from "../text-input.svelte";
-    import Icon from "../icon.svelte";
-    import audioUrl from '../../../sounds/ding.mp3';
+    import TodoItem from "~component/todos/todo-item";
+    import TodoCardActions from "~component/todos/todo-card-actions";
+    import AddTodoInput from "~component/todos/add-todo-input";
+    import TextInput from "~component/text-input";
+    import Icon from "~component/icon";
+    import audioUrl from "~/sounds/ding.mp3";
 
     const route = window.route;
 

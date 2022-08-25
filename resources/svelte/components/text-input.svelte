@@ -2,7 +2,7 @@
     import { afterUpdate, createEventDispatcher } from "svelte";
     import { fly } from 'svelte/transition';
 
-    import Icon from "./icon.svelte";
+    import Icon from "~component/icon";
 
     const dispatch = createEventDispatcher();
 

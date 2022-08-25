@@ -2,8 +2,8 @@
     import { onMount } from 'svelte';
     import { themeChange } from 'theme-change';
 
-    import SidebarContainer from "./sidebar/sidebar-container.svelte";
-    import DeleteModal from "./delete-modal.svelte";
+    import SidebarContainer from "~component/sidebar/sidebar-container";
+    import DeleteModal from "~component/delete-modal";
 
     let themes = 'night,winter';
     let currentTheme = localStorage.getItem("theme") ?? 'winter';

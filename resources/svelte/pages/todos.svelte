@@ -1,12 +1,12 @@
 <script>
     import { fly } from 'svelte/transition';
     import { page } from '@inertiajs/inertia-svelte';
-    import { todoDetail } from "../stores/todo-detail-store";
+    import { todoDetail } from "~store/todo-detail-store";
 
-    import PageTitle from "../components/page-title.svelte";
-    import Layout from "../components/layout.svelte";
-    import TodoCard from "../components/todos/todo-card.svelte";
-    import TodoDetailCard from "../components/todos/todo-detail-card.svelte";
+    import PageTitle from "~component/page-title";
+    import Layout from "~component/layout";
+    import TodoCard from "~component/todos/todo-card";
+    import TodoDetailCard from "~component/todos/todo-detail-card";
 
     $: category = $page.props.list;
     $: todos = $page.props.todos;

@@ -2,9 +2,9 @@
     import { createEventDispatcher } from "svelte";
     import { scale } from 'svelte/transition';
     import { Inertia } from "@inertiajs/inertia";
-    import { todoDetail } from "../../stores/todo-detail-store";
+    import { todoDetail } from "~store/todo-detail-store";
 
-    import Icon from "../icon.svelte";
+    import Icon from "~component/icon";
 
     const dispatch = createEventDispatcher();
     const route = window.route;

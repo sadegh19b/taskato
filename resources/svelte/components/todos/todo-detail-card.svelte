@@ -1,11 +1,11 @@
 <script>
     import { afterUpdate } from "svelte";
     import { Inertia } from "@inertiajs/inertia";
-    import { todoDetail } from "../../stores/todo-detail-store";
-    import { deleteModal } from "../../stores/delete-modal-store";
+    import { todoDetail } from "~store/todo-detail-store";
+    import { deleteModal } from "~store/delete-modal-store";
 
-    import TodoItem from "./todo-item.svelte";
-    import Icon from "../icon.svelte";
+    import TodoItem from "~component/todos/todo-item";
+    import Icon from "~component/icon";
 
     const route = window.route;
 

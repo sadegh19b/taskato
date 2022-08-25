@@ -4,9 +4,9 @@
     import { inertia, page } from '@inertiajs/inertia-svelte';
     import { SortableList } from '@jhubbardsf/svelte-sortablejs';
 
-    import SidebarListItem from "./sidebar-list-item.svelte";
-    import TextInput from "../text-input.svelte";
-    import Icon from "../icon.svelte";
+    import SidebarListItem from "~component/sidebar/sidebar-list-item";
+    import TextInput from "~component/text-input";
+    import Icon from "~component/icon";
 
     const route = window.route;
 

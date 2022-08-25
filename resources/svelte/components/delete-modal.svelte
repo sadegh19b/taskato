@@ -2,7 +2,7 @@
     import { afterUpdate } from "svelte";
     import { fly, fade } from "svelte/transition";
     import { Inertia } from "@inertiajs/inertia";
-    import { deleteModal } from "../stores/delete-modal-store";
+    import { deleteModal } from "~store/delete-modal-store";
 
     const toggleSidebarZIndex = () => {
         document.querySelector('.drawer-side').classList.toggle('drawer-side-z-index');
