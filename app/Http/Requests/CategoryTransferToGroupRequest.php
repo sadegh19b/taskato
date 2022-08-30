@@ -23,7 +23,7 @@ class CategoryTransferToGroupRequest extends FormRequest
                 $validator->errors()->add('group_id', __('The category must be a group.'));
             }
 
-            if ($_category->children()->find($this->category->id)->exists()) {
+            if ($_category->children()->whereId($this->category->id)->exists()) {
                 $validator->errors()->add('group_id', __('The category should not already be in the group.'));
             }
         });

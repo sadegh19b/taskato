@@ -11,7 +11,6 @@ class CategoryStoreRequest extends FormRequest
         return [
             'title' => ['required', 'max:64'],
             'is_group' => ['boolean'],
-            'sort' => ['numeric'],
             'parent_id' => ['nullable', 'numeric', 'exists:categories,id'],
         ];
     }

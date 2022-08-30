@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class Category extends Model
+class Category extends Model implements Sortable
 {
-    use HasFactory;
+    use HasFactory, SortableTrait;
 
     protected $guarded = ['id'];
     protected $casts = ['is_group' => 'boolean'];
@@ -29,20 +31,14 @@ class Category extends Model
         });
     }
 
-    public function scopeLatestParent($query, $parent_id = null)
+    public function parent()
     {
-        $query = is_null($parent_id) ? $query->whereNull('parent_id') : $query->where('parent_id', $parent_id);
-        return $query->latest('sort');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany(self::class, 'parent_id')->orderBy('sort');
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->ordered();
     }
 
     public function todos()

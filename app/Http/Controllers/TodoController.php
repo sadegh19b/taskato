@@ -24,8 +24,8 @@ class TodoController extends Controller
         }
 
         $todoModels = $category->todos()
-            ->latest('is_important')
-            ->orderBy('sort')
+            ->orderByDesc('is_important')
+            ->ordered()
             ->get();
 
         // Use collection `values` method for prevent collection returning array with index
@@ -41,12 +41,7 @@ class TodoController extends Controller
 
     public function reorder(Request $request)
     {
-        $ids = $request->input('reorder');
-        $sorts = array_keys($request->input('reorder'));
-
-        foreach ($sorts as $sort) {
-            Todo::find($ids[$sort])->update(['sort' => $sort]);
-        }
+        Todo::setNewOrder($request->input('reorder'));
     }
 
     public function update(Todo $todo, TodoUpdateRequest $request)
@@ -68,36 +63,21 @@ class TodoController extends Controller
 
     public function toggleImportant(Todo $todo)
     {
-        $todo->update(['is_important' => !$todo->is_important, 'sort' => 0]);
+        ($todo->is_important)
+            ? $todo->moveToStart()
+            : $todo->moveToEnd();
 
-        // Reorder all todos sort by important or not important
-        Todo::whereIsImportant($todo->is_important)
-            ->whereCategoryId($todo->category_id)
-            ->where('id', '!=', $todo->id)
-            ->orderBy('sort')
-            ->get()
-            ->each(function ($item, $index) {
-                $item->update(['sort' => $index + 1]);
-            });
+        $todo->update(['is_important' => !$todo->is_important]);
     }
 
     public function toggleTodo(Todo $todo)
     {
-        $lastTodo = Todo::whereIsImportant($todo->is_important)
-            ->whereCategoryId($todo->category_id)
-            ->latest('sort');
-
         if (is_null($todo->done_at)) {
-            $lastTodo = $lastTodo->whereNotNull('done_at');
-            $updateDoneAt = now();
+            $todo->update(['done_at' => now()]);
+            $todo->moveToStart();
         } else {
-            $lastTodo = $lastTodo->whereNull('done_at');
-            $updateDoneAt = null;
+            $todo->update(['done_at' => null]);
+            $todo->moveToEnd();
         }
-
-        $lastTodo = $lastTodo->first();
-        $sort = $lastTodo ? $lastTodo->sort + 1 : 0;
-
-        $todo->update(['done_at' => $updateDoneAt, 'sort' => $sort]);
     }
 }

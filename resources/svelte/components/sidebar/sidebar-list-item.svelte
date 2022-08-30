@@ -25,13 +25,9 @@
     let editGroupInputEnable = false;
 
     const saveList = (event) => {
-        let sort = Object.keys(subList);
-        sort = subList.length ? parseInt(sort[subList.length - 1]) + 1 : 0;
-
         const formData = {
             title: event.detail.input,
             is_group: false,
-            sort: sort,
             parent_id: item.id
         };
 

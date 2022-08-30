@@ -35,7 +35,7 @@ class InertiaServiceProvider extends ServiceProvider
                 return Category::count() ?
                     Category::whereParentId(null)
                     ->with('children')
-                    ->orderBy('sort')
+                    ->ordered()
                     ->get()
                     : [];
             });

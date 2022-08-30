@@ -10,7 +10,6 @@ class TodoStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:250'],
-            'sort' => ['numeric'],
         ];
     }
 

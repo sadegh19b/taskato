@@ -29,14 +29,9 @@
     };
 
     const saveListOrGroup = (event) => {
-        let sort = Object.keys(categories);
-        sort = categories.length ? parseInt(sort[categories.length - 1]) + 1 : 0;
-
         const formData = {
             title: event.detail.input,
             is_group: addGroupInputEnable,
-            //is_group: event.detail.is_group,
-            sort: sort
         };
 
         Inertia.post(route('categories.store'), formData);
