@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title', '64');
             $table->string('icon')->nullable();
             $table->boolean('is_group')->default(false);
-            $table->unsignedBigInteger('sort')->default(0);
+            $table->unsignedBigInteger('sort')->default(1);
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title', '250');
             $table->text('description')->nullable();
             $table->boolean('is_important')->default(false);
-            $table->unsignedBigInteger('sort')->default(0);
+            $table->unsignedBigInteger('sort')->default(1);
             $table->timestamp('done_at')->nullable();
             $table->timestamps();
         });
