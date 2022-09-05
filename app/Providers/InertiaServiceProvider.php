@@ -27,18 +27,19 @@ class InertiaServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Inertia::share('current_list', function (Request $request) {
-            return optional( $request->route()->parameter('category') )->makeVisible('parent_id');
-        });
-        Inertia::share('categories', function () {
-            return Cache::rememberForever('categories', function () {
-                return Category::count() ?
-                    Category::whereParentId(null)
-                    ->with('children')
-                    ->ordered()
-                    ->get()
-                    : [];
-            });
-        });
+        $getCategoryColumns = ['id', 'parent_id', 'title', 'is_group', 'sort'];
+
+        Inertia::share('current_list', fn(Request $request) => $request->route()?->parameter('category')?->only($getCategoryColumns));
+
+        Inertia::share('categories', fn() =>
+            Cache::rememberForever('categories', fn() =>
+                Category::count()
+                    ? Category::whereParentId(null)
+                        ->with('children', fn ($query) => $query->select($getCategoryColumns))
+                        ->ordered()
+                        ->get($getCategoryColumns)
+                    : []
+            )
+        );
     }
 }
