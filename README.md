@@ -11,6 +11,7 @@ A simple Laravel application to allow users to create group or list and add task
   - [Assets](#assets)
   - [Run the Project](#run)
   - [All Commands](#all-commands)
+- [Testing](#testing)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Built With](#built-with)
@@ -110,7 +111,7 @@ Run the project in the dev server (the output will give the address):
 php artisan serve
 ```
 
-### All Commands:
+### All Commands
 
 ```shell
 git clone git@github.com:sadegh19b/taskato.git
@@ -123,9 +124,17 @@ yarn
 yarn build
 ```
 
+## Testing
+
+```shell
+php artisan test
+```
+
 ## Roadmap
 
-- [ ] Write tests for logic and browser
+- [X] Endpoint & logic tests
+- [ ] Validation tests
+- [ ] End-to-end tests (browser tests)
 - [ ] Add confirm modal component in svelte
 - [ ] Add details modal component for show todo
 - [ ] Add toast component for show message after save, update, delete or in error case
