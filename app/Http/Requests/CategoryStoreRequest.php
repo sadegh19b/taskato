@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryStoreRequest extends FormRequest
 {
@@ -10,8 +11,18 @@ class CategoryStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:64'],
-            'is_group' => ['boolean'],
             'parent_id' => ['nullable', 'numeric', 'exists:categories,id'],
+            'is_group' => [
+                'boolean',
+                Rule::when(!is_null($this->parent_id), [function ($attribute, $value, $fail) {
+                    if ($value !== false) {
+                        $fail(__(
+                            'The :attribute field must be false when you add a new category to the group.',
+                            [':attribute', $attribute]
+                        ));
+                    }
+                }]),
+            ],
         ];
     }
 
